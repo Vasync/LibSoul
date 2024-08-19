@@ -10,7 +10,7 @@ final class Data {
 
     public static bool $isRegister = false;
     
-    public static ?TaskScheduler $scheduler;
+    public static ?TaskScheduler $scheduler = null;
 
     public static function setReg(bool $reg = true): void {
         self::$isRegister = $reg;
@@ -20,11 +20,11 @@ final class Data {
         return self::$isRegister;
     }
     
-    public static function setupScheduler(): void {
-        self::$scheduler = new TaskScheduler("LibSoul");
+    public static function setupScheduler(TaskScheduler $scheduler): void {
+        self::$scheduler = $scheduler;
     }
     
-    public static function getScheduler(): TaskScheduler {
+    public static function getScheduler(): ?TaskScheduler {
         return self::$scheduler;
     }
 }
