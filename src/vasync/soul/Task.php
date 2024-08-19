@@ -9,18 +9,18 @@ use pocketmine\plugin\PluginBase;
 
 interface VTask {
 
-    public function setTimeout(callable $callback, int $delay): void;
+    public static function setTimeout(callable $callback, int $delay): void;
 
-    public function setInterval(callable $callback, int $interval): void;
+    public static function setInterval(callable $callback, int $interval): void;
 
-    public function clearTimeout(PMTask $task): void;
+    public static function clearTimeout(PMTask $task): void;
 
-    public function clearInterval(PMTask $task): void;
+    public static function clearInterval(PMTask $task): void;
 }
 
 final class Task implements VTask {
 
-    public function setTimeout(callable $callback, int $delay): void {
+    public static function setTimeout(callable $callback, int $delay): void {
         Data::getScheduler()->scheduleDelayedTask(new class($callback) extends PMTask {
             private $callback;
 
@@ -34,7 +34,7 @@ final class Task implements VTask {
         }, $delay);
     }
 
-    public function setInterval(callable $callback, int $interval): void {
+    public static function setInterval(callable $callback, int $interval): void {
         Data::getScheduler()->scheduleRepeatingTask(new class($callback) extends PMTask {
             private $callback;
 
@@ -48,11 +48,11 @@ final class Task implements VTask {
         }, $interval);
     }
 
-    public function clearTimeout(PMTask $task): void {
+    public static function clearTimeout(PMTask $task): void {
         Data::getScheduler->cancelTask($task->getTaskId());
     }
 
-    public function clearInterval(PMTask $task): void {
+    public static function clearInterval(PMTask $task): void {
         Data::getScheduler->cancelTask($task->getTaskId());
     }
 }
