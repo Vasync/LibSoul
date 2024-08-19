@@ -13,9 +13,9 @@ interface VTask {
 
     public function setInterval(callable $callback, int $interval): void;
 
-    public function clearTimeout(Task $task): void;
+    public function clearTimeout(PMTask $task): void;
 
-    public function clearInterval(Task $task): void;
+    public function clearInterval(PMTask $task): void;
 }
 
 final class Task implements VTask {
