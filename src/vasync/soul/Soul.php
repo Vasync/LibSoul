@@ -12,7 +12,7 @@ final class Soul {
     public static function init(PluginBase $plugin) {
         if (Data::getReg() !== true) {
             Data::setReg();
-            Data::setupScheduler();
+            Data::setupScheduler($plugin->getScheduler());
         }
     }
 }
